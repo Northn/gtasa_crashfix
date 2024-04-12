@@ -63,6 +63,8 @@ void SetHeatHazeEnabled ( bool bEnabled )
 }
 
 void checkForUpdate() {
+	if (true) return;
+
 	remove("crashes.delete");
 	HINTERNET hNet, hNetFile;
 
@@ -143,10 +145,10 @@ static void WINAPI Load(HMODULE hModule)
 	MemCpy((void*)0x074872D, "\x90\x90\x90\x90\x90\x90\x90\x90\x90", 9);
 
 	// Hack to make SA-MP think the game is always unpaused
-	MemCpy((void*)0x53E9B3, "\x75\x44\x90\x90\x90\x90", 6); // jne 0x53E9F9
+	//MemCpy((void*)0x53E9B3, "\x75\x44\x90\x90\x90\x90", 6); // jne 0x53E9F9
 
 	// Hack to make the game run in the background when paused
-	MemPut < BYTE >(0x561AF6, 0x00); // mov byte ptr [0xB7CB49],01 -> mov byte ptr [0xB7CB49],00
+	//MemPut < BYTE >(0x561AF6, 0x00); // mov byte ptr [0xB7CB49],01 -> mov byte ptr [0xB7CB49],00
 
 
 	// NOTE: all the alt tab hooks here are not working. not sure why.

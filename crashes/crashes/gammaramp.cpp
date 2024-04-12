@@ -31,6 +31,7 @@ CGammaRamp::~CGammaRamp()
 
 BOOL CGammaRamp::LoadLibrary()
 {
+	return FALSE;
 	BOOL bReturn = FALSE;
 
 	FreeLibrary();
@@ -58,6 +59,7 @@ BOOL CGammaRamp::LoadLibrary()
 
 void CGammaRamp::FreeLibrary()
 {
+	return;
 	//Free the GDI library.
 	if (hGDI32 != NULL) 
 	{
@@ -69,6 +71,7 @@ void CGammaRamp::FreeLibrary()
 
 BOOL CGammaRamp::LoadLibraryIfNeeded()
 {
+	return FALSE;
 	BOOL bReturn = FALSE;
 
 	if (hGDI32 == NULL)
@@ -83,6 +86,7 @@ BOOL CGammaRamp::LoadLibraryIfNeeded()
 
 BOOL CGammaRamp::SetDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 {
+	return FALSE;
 	//Call to SetDeviceGammaRamp only if this function is successfully loaded.
 	if (LoadLibraryIfNeeded())
 	{
@@ -95,6 +99,7 @@ BOOL CGammaRamp::SetDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 
 BOOL CGammaRamp::GetDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 {
+	return FALSE;
 	//Call to GetDeviceGammaRamp only if this function is successfully loaded.
 	if (LoadLibraryIfNeeded())
 	{
@@ -108,6 +113,7 @@ BOOL CGammaRamp::GetDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 
 BOOL CGammaRamp::SetBrightness(HDC hDC, WORD wBrightness)
 {
+	return FALSE;
 	/*
 	Changes the brightness of the entire screen.
 	This function may not work properly in some video cards.
