@@ -139,7 +139,7 @@ static void WINAPI Load(HMODULE hModule)
 	}
 
 	// Make it so we can launch more than 1 gta_sa.exe (reversed addresses from http://ugbase.eu/index.php?threads/gta-sa-multiprocess-updated.4100/)
-	MemCpy((void*)0x406946, "\x00\x00\x00\x00", 4);
+	//MemCpy((void*)0x406946, "\x00\x00\x00\x00", 4);
 
 	// Allow windowed mode. Alt+enter to activate (reversed addresses from http://ugbase.eu/index.php?threads/gta-sa-multiprocess-updated.4100/)
 	MemCpy((void*)0x074872D, "\x90\x90\x90\x90\x90\x90\x90\x90\x90", 9);
