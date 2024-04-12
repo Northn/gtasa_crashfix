@@ -34,14 +34,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 		case DLL_PROCESS_ATTACH:
 		{
 			g_hMod = hModule;
-			HANDLE hThread = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Load, hModule, 0, 0);
-			if (hThread == NULL) 
-			{
-				ExitProcess(GetLastError());
-				return FALSE;
-			}
-
-			SetThreadPriority(hThread, THREAD_PRIORITY_LOWEST);
+			Load(hModule);
 			break;
 		}
 		case DLL_PROCESS_DETACH:
@@ -134,9 +127,9 @@ static void WINAPI Load(HMODULE hModule)
 
 	patcher_install(&patch_EnableResolutions);
 	
-	while(*(int*)0xB6F5F0 == 0) { 
+	/*while(*(int*)0xB6F5F0 == 0) { 
 		Sleep(100);
-	}
+	}*/
 
 	// Make it so we can launch more than 1 gta_sa.exe (reversed addresses from http://ugbase.eu/index.php?threads/gta-sa-multiprocess-updated.4100/)
 	//MemCpy((void*)0x406946, "\x00\x00\x00\x00", 4);
@@ -556,58 +549,58 @@ static void WINAPI Load(HMODULE hModule)
 
 	//checkForUpdate();
 	
-	bool laststate = false;
-	int previousbrightness = -1;
-	if(brightness != -1 || mousefix == 1)
-	{
-		while (true) {
+	//bool laststate = false;
+	//int previousbrightness = -1;
+	//if(brightness != -1 || mousefix == 1)
+	//{
+	//	while (true) {
 
-			TCHAR wintitle[50];
-			ZeroMemory(wintitle, sizeof(wintitle));
+	//		TCHAR wintitle[50];
+	//		ZeroMemory(wintitle, sizeof(wintitle));
 
-			HWND hwnd = *(HWND*)0xC97C1C;
-			HWND ActiveWin = GetForegroundWindow();  // Gets a handle to the window..
+	//		HWND hwnd = *(HWND*)0xC97C1C;
+	//		HWND ActiveWin = GetForegroundWindow();  // Gets a handle to the window..
 
-			char WindowText[50];
-			GetWindowText(ActiveWin, WindowText, sizeof(WindowText));
-			GetWindowText(hwnd, wintitle, sizeof(wintitle));
-			if ((!strcmp(wintitle, WindowText) || ((!strcmp(wintitle, "GTA: San Andreas") && !strcmp(WindowText, "GTA:SA:MP")) || !strcmp(WindowText, "GTA: San Andreas") && !strcmp(wintitle, "GTA:SA:MP"))) && strlen(wintitle) > 0 && strlen(WindowText) > 0) {
+	//		char WindowText[50];
+	//		GetWindowText(ActiveWin, WindowText, sizeof(WindowText));
+	//		GetWindowText(hwnd, wintitle, sizeof(wintitle));
+	//		if ((!strcmp(wintitle, WindowText) || ((!strcmp(wintitle, "GTA: San Andreas") && !strcmp(WindowText, "GTA:SA:MP")) || !strcmp(WindowText, "GTA: San Andreas") && !strcmp(wintitle, "GTA:SA:MP"))) && strlen(wintitle) > 0 && strlen(WindowText) > 0) {
 
-				if (brightness != previousbrightness && brightness != -1)
-				{
-					GammaRamp.SetBrightness(NULL, brightness);
-				}
+	//			if (brightness != previousbrightness && brightness != -1)
+	//			{
+	//				GammaRamp.SetBrightness(NULL, brightness);
+	//			}
 
-				previousbrightness = brightness;
+	//			previousbrightness = brightness;
 
-				if (mousefix && laststate)
-				{
+	//			if (mousefix && laststate)
+	//			{
 
-					// F6
-					keybd_event(0x75, 0, NULL, 0);
-					keybd_event(0x75, 0, KEYEVENTF_KEYUP, 0);
-					Sleep(50);
+	//				// F6
+	//				keybd_event(0x75, 0, NULL, 0);
+	//				keybd_event(0x75, 0, KEYEVENTF_KEYUP, 0);
+	//				Sleep(50);
 
-					// ESC
-					keybd_event(0x1B, 0, NULL, 0);
-					keybd_event(0x1B, 0, KEYEVENTF_KEYUP, 0);
+	//				// ESC
+	//				keybd_event(0x1B, 0, NULL, 0);
+	//				keybd_event(0x1B, 0, KEYEVENTF_KEYUP, 0);
 
-					// we should think of a better solution then opening chat to hide mouse.
-					laststate = false;
-				}
+	//				// we should think of a better solution then opening chat to hide mouse.
+	//				laststate = false;
+	//			}
 
-			}
-			else {
-				if (previousbrightness != 128 && brightness != -1) GammaRamp.SetBrightness(NULL, 128);
-				previousbrightness = 128;
-				if (mousefix && !laststate) {
+	//		}
+	//		else {
+	//			if (previousbrightness != 128 && brightness != -1) GammaRamp.SetBrightness(NULL, 128);
+	//			previousbrightness = 128;
+	//			if (mousefix && !laststate) {
 
-					laststate = true;
-				}
-				continue;
-			}
+	//				laststate = true;
+	//			}
+	//			continue;
+	//		}
 
-			Sleep(500);
-		}
-	}
+	//		Sleep(500);
+	//	}
+	//}
 }
