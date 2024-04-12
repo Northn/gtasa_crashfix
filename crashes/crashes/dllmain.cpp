@@ -170,10 +170,10 @@ static void WINAPI Load(HMODULE hModule)
 	if(GetModuleHandle("samp.dll") != NULL) {
 
 		// STOP IT TRYING TO LOAD THE SCM
-		MemPut < BYTE > ( 0x468EB5, 0xEB );
-		MemPut < BYTE > ( 0x468EB6, 0x32 );
+		//MemPut < BYTE > ( 0x468EB5, 0xEB );
+		//MemPut < BYTE > ( 0x468EB6, 0x32 );
 
-		MemPutFast < int > ( 0x8a5a84, 127 );
+		//MemPutFast < int > ( 0x8a5a84, 127 );
 
 		// DISABLE CGameLogic::Update
 		//MemSet ((void *)0x442AD0, 0xC3, 1);
